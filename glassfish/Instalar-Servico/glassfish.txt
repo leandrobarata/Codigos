@@ -1,0 +1,33 @@
+#!/bin/bash
+# description: glassfish start stop restart
+# processname: glassfish
+# chkconfig: 2345 20 80
+
+
+
+GLASSFISH_HOME=/opt/glassfish3/glassfish
+GLASSFISH_USER=glassfish
+RETVAL=0
+
+case "$1" in
+start)
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin start-domain server"
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin start-local-instance nome_da_instancia"
+
+;;
+stop)
+
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin stop-local-instance nome_da_instancia
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin stop-domain server"
+;;
+restart)
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin restart-domain server"
+
+su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin restart-local-instance nome_da_instancia
+;;
+*)
+echo $"Usage: $0 {start|stop|restart}"
+RETVAL=1
+esac
+exit $RETVAL
+
