@@ -1,0 +1,17 @@
+acessar : https://github.com/BeyondTrust/pbis-open/releases
+
+https://github.com/BeyondTrust/pbis-open/releases/download/9.1.0/pbis-open-9.1.0.551.linux.x86_64.rpm.sh
+
+yum install libnsl
+
+chmod 777 pbis-open-9.1.0.551.linux.x86_64.rpm.sh
+
+./pbis-open-9.1.0.551.linux.x86_64.rpm.sh install
+
+
+edit /etc/sudoers -  %DOMINIO\\nomedogrupo ALL=(ALL) ALL, !/usr/bin/passwd root
+
+
+domainjoin-cli join dominio  usuario
+
+digitar no terminal : /opt/pbis/bin/config RequireMembershipOf "dominio\nomedogrupo"
