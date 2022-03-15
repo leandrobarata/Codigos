@@ -9,6 +9,8 @@ sudo useradd -d /usr/share/tomcat -r -s /bin/false -g tomcat tomcat
 
 ## BAIXAR O TOMCAT##
 
+https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.17/bin/apache-tomcat-10.0.17.tar.gz
+
 sudo tar xvf apache-tomcat-${VER}.tar.gz -C /usr/share/
 
 
