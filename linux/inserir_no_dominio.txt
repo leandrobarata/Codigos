@@ -15,3 +15,13 @@ edit /etc/sudoers -  %DOMINIO\\nomedogrupo ALL=(ALL) ALL, !/usr/bin/passwd root
 domainjoin-cli join dominio  usuario
 
 digitar no terminal : /opt/pbis/bin/config RequireMembershipOf "dominio\nomedogrupo"
+
+
+
+
+PARA SMB
+
+
+/opt/pbis/bin/samba-interop-install --install
+systemctl restart lwsmd.service
+systemctl restart smb.service
