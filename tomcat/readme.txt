@@ -134,9 +134,9 @@ nano /usr/share/apache-tomcat-9.0.59/webapps/manager/META-INF/context.xml
 </Host>
 
 
-## Remover informações de versão#
+## Remover informações de versão#  editar nano /opt/tomcat9/conf/server.xml
 
-Dentro do <Host name=
+Dentro do <Host name= INSERIR ABAIXO
 
 <Valve className="org.apache.catalina.valves.ErrorReportValve" showReport="false" showServerInfo="false" />
 
