@@ -1,0 +1,18 @@
+####  Anexos , PDF , DOCX apresenta alteração no arquivo quando baixados - Primeira folha com mensagem que arquivo foi scaneado pelo AV #### Content Disarm and Reconstruction
+
+em : https://docs.fortinet.com/document/fortigate/6.2.0/cookbook/788313/content-disarm-and-reconstruction-for-antivirus
+
+
+
+NO TERMINAL CLI:
+
+config antivirus profile
+
+edit default  (default é perfil do AV no firewall)
+
+config content-disarm
+
+set cover-page disable
+
+end
+
