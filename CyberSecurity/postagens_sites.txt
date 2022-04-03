@@ -1,0 +1,8 @@
+
+
+
+### Two interesting techniques used by LAPSUS$ (Code Signing, Disable and Modify Tools) ####
+
+https://michaelkoczwara.medium.com/lapsus-ttps-431d1ca21e80
+
+

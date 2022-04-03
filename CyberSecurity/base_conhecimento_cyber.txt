@@ -4,6 +4,18 @@ https://www.threatable.io/
 
 
 
+#### FRAMEWORKS ###
+
+https://attack.mitre.org/techniques/enterprise/
+
+https://www.nist.gov/cyberframework/framework
+
+
+
+
+
+
+
 ## Editor codigo on line ## Teste seu codigo rapidamente com publicação externa do seu sistema/app/site
 
 https://codesandbox.io/
@@ -49,5 +61,42 @@ https://www.pictalio.com/
 
 
 https://www.trendhunter.com/
+
+
+
+
+### extensão chrome para copiar palavras de uma imagem e tranformar em texto  #####
+
+
+https://chrome.google.com/webstore/detail/blackbox-select-copy-past/mcgbeeipkmelnpldkobichboakdfaeon
+
+
+
+### extensão chrome para copiar icones utilizado no site  #####
+
+
+https://chrome.google.com/webstore/detail/svg-export/naeaaedieihlkmdajjefioajbbdbdjgp?hl=en-GB
+
+
+
+
+
+
+######  Ele pega um texto e transcreve em outras palavras ########
+
+https://quillbot.com/
+
+
+
+
+
+
+#### Site para desenhar e gerar icones atraves de inteligencia artifical #####
+
+https://www.autodraw.com/
+
+
+
+
 
 
