@@ -6,3 +6,7 @@
 https://michaelkoczwara.medium.com/lapsus-ttps-431d1ca21e80
 
 
+
+#### cheat sheet XSS #####
+https://github.com/payloadbox/xss-payload-list
+
