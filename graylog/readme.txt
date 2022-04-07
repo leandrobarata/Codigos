@@ -1,57 +1,99 @@
+Tuning no kernel
+# echo "vm.swappiness=10" >> /etc/sysctl.conf
+# echo "vm.max_map_count=262144" > /etc/sysctl.d/70-elasticsearch.conf
+# cat <<EOF >/etc/sysctl.d/60-net.conf
+net.core.netdev_max_backlog=4096
+net.core.rmem_default=262144
+net.core.rmem_max=67108864
+net.ipv4.udp_rmem_min=131072
+net.ipv4.udp_mem=2097152 4194304 8388608
+EOF
+
+# sysctl -w vm.max_map_count=262144 && \
+sysctl -w net.core.netdev_max_backlog=4096 && \
+sysctl -w net.core.rmem_default=262144 && \
+sysctl -w net.core.rmem_max=67108864 && \
+sysctl -w net.ipv4.udp_rmem_min=131072 && \
+sysctl -w net.ipv4.udp_mem='2097152 4194304 8388608'
 
 
-
-
-
-
-#### Criar serviço glassfish###
-
-vi /etc/init.d/glassfish
-
-
-#!bin/bash
+	
+# echo "vm.swappiness=10" >> /etc/sysctl.conf
+# echo "vm.max_map_count=262144" > /etc/sysctl.d/70-elasticsearch.conf
+# cat <<EOF >/etc/sysctl.d/60-net.conf
+net.core.netdev_max_backlog=4096
+net.core.rmem_default=262144
+net.core.rmem_max=67108864
+net.ipv4.udp_rmem_min=131072
+net.ipv4.udp_mem=2097152 4194304 8388608
+EOF
  
-# description: glassfish start stop restart
-# processname: glassfish
-# chkconfig: 2345 20 80
+# sysctl -w vm.max_map_count=262144 && \
+sysctl -w net.core.netdev_max_backlog=4096 && \
+sysctl -w net.core.rmem_default=262144 && \
+sysctl -w net.core.rmem_max=67108864 && \
+sysctl -w net.ipv4.udp_rmem_min=131072 && \
+sysctl -w net.ipv4.udp_mem='2097152 4194304 8388608'
+
+
+
+
+
+Adicione o arquivo e defina e heap.optionsa cerca de um terço da memória do sistema, mas não exceda . Para este exemplo, usaremos 12 GB dos 32 GB de memória disponíveis para heap da JVM.
+
+# echo -e "-Xms12g\n-Xmx12g" > /etc/elasticsearch/jvm.options.d/heap.options
+1
+	
+# echo -e "-Xms12g\n-Xmx12g" > /etc/elasticsearch/jvm.options.d/heap.options
+
+Os limites do sistema aumentados devem ser especificados em um systemd.
+
+# mkdir /etc/systemd/system/elasticsearch.service.d
+# cat <<EOF >/etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
+[Service]
+LimitNOFILE=131072
+LimitNPROC=8192
+LimitMEMLOCK=infinity
+LimitFSIZE=infinity
+LimitAS=infinity
+EOF
+
+	
+# mkdir /etc/systemd/system/elasticsearch.service.d
+# cat <<EOF >/etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
+[Service]
+LimitNOFILE=131072
+LimitNPROC=8192
+LimitMEMLOCK=infinity
+LimitFSIZE=infinity
+LimitAS=infinity
+EOF
+
+Após instalação vamos alterar network.host para ouvir apenas localhost, em seguida ativar o serviço e inicia-lo.
+# sed -i 's/#cluster.name: my-application/cluster.name: elastiflow/' /etc/elasticsearch/elasticsearch.yml
+# sed -i 's/#network.host: 192.168.0.1/network.host: 127.0.0.1/' /etc/elasticsearch/elasticsearch.yml
+# echo "discovery.type: 'single-node'" >> /etc/elasticsearch/elasticsearch.yml
+# echo "indices.query.bool.max_clause_count: 8192" >> /etc/elasticsearch/elasticsearch.yml
+# echo "search.max_buckets: 250000" >> /etc/elasticsearch/elasticsearch.yml
+
+# systemctl daemon-reload
+# systemctl enable elasticsearch
+# systemctl start elasticsearch
+# systemctl status elasticsearch
+
+	
+# sed -i 's/#cluster.name: my-application/cluster.name: elastiflow/' /etc/elasticsearch/elasticsearch.yml
+# sed -i 's/#network.host: 192.168.0.1/network.host: 127.0.0.1/' /etc/elasticsearch/elasticsearch.yml
+# echo "discovery.type: 'single-node'" >> /etc/elasticsearch/elasticsearch.yml
+# echo "indices.query.bool.max_clause_count: 8192" >> /etc/elasticsearch/elasticsearch.yml
+# echo "search.max_buckets: 250000" >> /etc/elasticsearch/elasticsearch.yml
  
-GLASSFISH_HOME=/u01/app/glassfish3
-GLASSFISH_USER=oracle
-RETVAL=0
- 
-case "$1" in
-start)
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin start-domain domain1"
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin start-local-instance instance1"
-;;
-stop)
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin stop-local-instance instance1"
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin stop-domain domain1"
-;;
-restart)
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin restart-local-instance instance1"
-su - $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin restart-domain domain1"
-;;
-*)
-echo $"Usage: $0 {start|stop|restart}"
-RETVAL=1
-esac
-exit $RETVAL
-
-
-
-## DEFINIR PERMISSOES ####
-
- chmod 755 /etc/init.d/glassfish
-sh /etc/init.d/glassfish start
- chkconfig –add glassfish
-
-## VALIDAR SERVIÇO ##
-
-chkconfig|grep glassfish
-
-glassfish 0:off 1:off 2:on 3:on 4:on 5:on 6:off
+# systemctl daemon-reload
+# systemctl enable elasticsearch
+# systemctl start elasticsearch
+# systemctl status elasticsearch
 
 
 
 
+mais em : https://blog.remontti.com.br/6255
