@@ -1,0 +1,25 @@
+##### Montar VIA FSTAB
+
+
+editar nano /home/.credentials
+
+user=USUARIO
+password=SENHA
+domain=DOMINIO
+
+
+editar nano /etc/fstab
+
+//IPCOMPARTILHAMENTODOSAMBA/bkporacle /backuporacle cifs rw,credentials=/home/.credentials,uid=oracle,gid=oinstall 0 0
+
+
+mount -a 
+
+
+##### Montar VIA terminal
+
+
+ mount -t cifs -o user=USUARIO,password="SENHA",domain=NOMEDOMINIO,uid=oracle,gid=oinstall //IPDOCOMPARTILHAMENTOSAMBA/bkporacle /backuporacle/
+
+
+

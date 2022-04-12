@@ -1,0 +1,98 @@
+#### SCANEAR PORTAS SCSI VMWARE
+
+
+echo "- - -" > /sys/class/scsi_host/host#/scan
+
+
+ls /sys/class/scsi_device/
+
+echo 1 > /sys/class/scsi_device/1\:0\:0\:0/device/rescan
+echo 1 > /sys/class/scsi_device/2\:0\:0\:0/device/rescan
+echo 1 > /sys/class/scsi_device/5\:0\:2\:0/device/rescan
+
+
+OU
+
+
+ echo "- - -" > /sys/class/scsi_host/host0/scan
+ echo "- - -" > /sys/class/scsi_host/host1/scan
+ echo "- - -" > /sys/class/scsi_host/host2/scan
+ echo "- - -" > /sys/class/scsi_host/host3/scan
+ echo "- - -" > /sys/class/scsi_host/host4/scan
+ echo "- - -" > /sys/class/scsi_host/host5/scan
+
+
+
+
+
+ls /sys/class/scsi_device/
+1:0:0:0  2:0:0:0  2:0:1:0  2:0:2:0  3:0:0:0  3:0:1:0  4:0:0:0  5:0:0:0  5:0:1:0
+
+
+ls -d /sys/block/sd*/device/scsi_device/*
+
+/sys/block/sda/device/scsi_device/2:0:0:0
+/sys/block/sdb/device/scsi_device/2:0:1:0
+/sys/block/sdc/device/scsi_device/2:0:2:0
+/sys/block/sdd/device/scsi_device/3:0:0:0
+/sys/block/sde/device/scsi_device/3:0:1:0
+/sys/block/sdf/device/scsi_device/4:0:0:0
+/sys/block/sdg/device/scsi_device/5:0:0:0
+/sys/block/sdh/device/scsi_device/5:0:1:0
+
+
+
+   
+
+#### EXPANDIR DISCO
+
+
+
+
+fdisk -l 
+
+
+fdisk /dev/sdb
+
+opcao: n  , p , default ,default finaliza com w
+
+mkfs.ext4 /dev/sdb1
+
+
+vgdisplay -s
+
+lvdisplay
+
+pvcreate /dev/sdb1 
+
+adcionar ao grupo ( add nome do vgdisplay )
+
+vgextend debian-root /dev/sdb1
+
+
+pvdisplay -s
+
+
+lvextend -L +500g /dev/debian-root/root
+
+resize2fs /dev/debian-root/root   ou   xfs_growfs /dev/ol/root
+
+
+df -h
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+    

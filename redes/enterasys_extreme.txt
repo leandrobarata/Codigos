@@ -1,0 +1,82 @@
+####### Criar VLAN (neste exemplo criei a vlan 30) #######                                ##
+
+(sw)->set vlan create 30                                                                  ##
+
+####### Colocar VLAN em uma porta especifica ou colocar em varias portas #######          ##
+
+(sw)->set port vlan ge.1.10 30 modify-egress                                              ##
+(sw)->set port vlan ge.1.1-20 30 modify-egress                                            ##
+
+####### Tagguear(tagged) uma porta especifica #######                                     ##
+
+(sw)->set vlan egress 30 ge.1.15 tagged                                                   ##
+
+####### destagguear (untagged) uma porta especifica #######                               ##
+
+(sw)->set vlan egress 30 ge.1.15 untagged                                                 ##
+
+####### listar as portas, as vlans e as tagged e untagged #######                         ##
+
+(sw)->show vlan port                                                                      ##
+
+####### habilitar ou desabilitar porta PoE #######                                        ##
+
+(sw)->set port inlinepower ge.1.1 admin off                                (desabilita)   ##
+(sw)->set port inlinepower ge.1.1 admin auto                               (Habilita)     ##
+
+
+
+#######  APAGAR VLAN DAS PORTAS #######                               ##
+
+(sw)->clear port vlan ge.1.3, ge.1.11                                 ##
+
+#######   APAGAR VLAN EGRESS DAS PORTAS #######                       ##
+
+(sw)->clear vlan egress 1 ge.2.1                                      ##
+
+
+##########################################################################################################################################################################################################
+
+LAG 
+
+set lacp static lag.0.6 key 6 ge.2.13-16
+
+
+############################################################################################################################################################################################################
+
+
+
+#######  CRIAR ROTA #######   
+
+
+
+ip route 172.16.100.0 255.255.255.0 192.168.200.2 interface vlan.0.1
+
+
+
+
+
+###  LAG  ###
+
+
+lag.0.9
+
+Aggregator:  lag.0.9
+                          Actor                 Partner
+System Identifier:  00:11:88:a2:92:aa      20:b3:99:56:3d:d0
+  System Priority:                100                    32768
+        Admin Key:                  9
+         Oper Key:                  9                   9
+   Attached Ports:  ge.3.27,31,29,25
+
+
+
+set lacp aadminkey lag.0.9 9
+
+set port lacp port ge.3.27,31,29,25 aadminkey 1
+
+set port lacp port ge.3.27,31,29,25 disable
+
+set port lacp port ge.3.27,31,29,25 padminstate lacpagg
+
+set vlan egress 1616  lag.0.9 tagged
