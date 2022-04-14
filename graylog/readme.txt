@@ -95,5 +95,16 @@ Após instalação vamos alterar network.host para ouvir apenas localhost, em se
 
 
 
+## EDITAR PARAMETROS DISCO CHEIO
+
+nano /etc/elasticsearch/elasticsearch.yml
+
+cluster.routing.allocation.disk.watermark.low: 95%
+cluster.routing.allocation.disk.watermark.high: 98%
+cluster.routing.allocation.disk.watermark.flood_stage: 99%
+
+
+
+
 
 mais em : https://blog.remontti.com.br/6255
