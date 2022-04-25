@@ -1,0 +1,26 @@
+### Acesso ao gerenciador do VDP  #### 
+
+https://IP:8543/vdp-configure/
+
+
+
+### Parar todos serviços#### 
+
+dpnctl stop  all
+
+
+### Verificar se os JOBS de backup estão em execução #### 
+
+
+mccli activity show --active
+
+
+### Cancelar um JOB em execução #### 
+
+ mccli activity cancel --id=XXXXXXXXXXXX
+
+
+
+
+
+ver em :  https://www.experts-exchange.com/articles/17333/HOW-TO-Fix-the-VMware-Data-Protection-error-VDP-001-The-most-recent-checkpoint-for-the-VDP-appliance-is-outdated.html

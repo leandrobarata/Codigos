@@ -1,0 +1,26 @@
+
+Editar  C:\ProgramData\VMware\VMware Tools\Tools.conf  
+
+[vmbackup]
+vss.disableAppQuiescing = true
+
+
+
+
+    Disable VSS application quiescing using the vSphere Client:
+
+        Power off the virtual machine.
+        Log in to the vCenter Server or the ESXi host through the vSphere Client.
+        Right-click the virtual machine and click Edit settings.
+        Click the Options tab.
+        Navigate to Advanced > General > Configuration Parameters.
+        Add or modify the row: disk.EnableUUID with the value FALSE.
+
+
+disk.EnableUUID   FALSE 
+
+
+
+
+
+VER EM : https://kb.vmware.com/s/article/2146204   e   https://kb.vmware.com/s/article/2101291
