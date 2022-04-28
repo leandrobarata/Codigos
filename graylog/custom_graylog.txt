@@ -1,0 +1,111 @@
+  ######   Dashboards  ####
+
+PARA Servidor de arquivos
+
+gl2_source_input:618bc6e832afad7f7575224d AND EventID:4663 NOT SubjectUserName:PAIAGUAS$  NOT SubjectUserName:"SERVIÇO LOCAL" NOT SubjectUserName:"Acronis Agent User"
+
+
+PARA O AD
+
+
+## Usuario X IP  ##
+gl2_source_input:61f19d6a21f72b7af1e802db AND EventID:4624 NOT TargetUserName:SISTEMA
+
+
+##  IP x PC   ##
+gl2_source_input:61f19d6a21f72b7af1e802db AND EventID:4624 NOT NomeDoComputador:BELAVISTA NOT NomeDoComputador:SAOANTONIO NOT NomeDoComputador:SAOMATEUS
+
+
+###  Alterou usuario no AD  ####
+gl2_source_input:61f19d6a21f72b7af1e802db AND EventID:4738
+
+
+
+###  Criou usuario no AD   #####
+gl2_source_input:61f19d6a21f72b7af1e802db AND EventID:4720
+
+
+
+###   Deletou usuario no AD   #####
+gl2_source_input:61f19d6a21f72b7af1e802db AND EventID:4726
+
+
+
+
+
+
+####  FILTRO PARA FILE SERVER   ####
+
+
+Criar extractor para arquivo
+
+
+arquivo ->  Trying to extract data from full_message into arquivo, leaving the original intact.	
+
+Configuration :
+
+    regex_value: ^.*Nome do Objeto:(.+?)\s.$
+
+
+
+Criar extractor para ação
+
+
+ação ->  Trying to extract data from full_message into acao_executada, leaving the original intact.
+
+Configuration
+
+    regex_value: \b(DELETE)\b
+
+
+
+
+
+
+####  FILTRO PARA AD   ####
+
+
+
+
+Criar extractor para Nome do Computador sem Tratamento
+
+
+NomeDoComputadorSemTratamento  ->  Trying to extract data from TargetUserName into NomeDoComputadorSemTratamento, leaving the original intact.
+
+Configuration
+
+    regex_value: ([a-zA-Z0-9-----_-]{1,15}\$)
+
+
+
+
+
+Criar extractor para Nome do Computador
+
+
+NomeDoComputadorSemTratamento  ->  Trying to extract data from NomeDoComputadorSemTratamento into NomeDoComputador, leaving the original intact.
+
+Configuration
+
+    regex_value: ([a-zA-Z0-9-----_-]{1,15}\$)
+
+
+
+
+Criar extractor para Nome do Usuario
+
+
+TargetUserName  ->  Trying to extract data from TargetUserName into NomeDoUsuario, leaving the original intact.
+
+Configuration
+
+       regex_value: ([a-zA-Z-.-a-zA-Z]{1,15}\.[a-zA-Z-.-a-zA-Z]{1,15})
+
+
+
+
+
+
+
+
+
