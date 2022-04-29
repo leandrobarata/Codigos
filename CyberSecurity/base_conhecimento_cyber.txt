@@ -11,8 +11,14 @@ https://attack.mitre.org/techniques/enterprise/
 https://www.nist.gov/cyberframework/framework
 
 
+#### EDITOR REGEX ###
+https://regex101.com/
 
 
+
+#### WHOIS ###
+
+https://myip.ms/info/whois/
 
 
 
