@@ -21,6 +21,11 @@ xRay Web Vulnerability Scanner Advanced v1.8.4
 
 
 
+Metasploit PRO
+
+
+
+
 ### Forensics Tool  ###
 
 
