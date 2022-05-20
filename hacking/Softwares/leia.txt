@@ -1,0 +1,46 @@
+LINK PARTICULAR BUCKET/DRIVE
+
+ceo@harpagus.com.br
+
+
+
+###  PENTEST ###
+
+Burp Suite Professional Edition v2022.3.7
+
+Acunetix Premium v14.7.220425114
+
+
+HCL AppScan Standard v10.0.7.28150
+
+
+Invicti Professional Edition 6.5.0.35961 
+
+
+xRay Web Vulnerability Scanner Advanced v1.8.4
+
+
+
+### Forensics Tool  ###
+
+
+Binalyze IREC Dongle Tactical Edition v2.6.2 
+
+
+Magnet AXIOM Forensics 5.8.0.27495
+
+
+
+
+### OSINT Tool  ###
+
+
+Maltego XL v4.2.18
+
+
+
+### LOG  ####
+
+
+
+Splunk Enterprise Unlimited v8.2.6
