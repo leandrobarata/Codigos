@@ -1,0 +1,32 @@
+#### Gerar CHAVE SSH na estação  ####
+
+
+#### Inserir a chave no DEVOPS AZURE  ####
+
+
+####  na estação editar /root/.ssh/config e adcionar:   ####
+
+host *
+
+KexAlgorithms +diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512
+Ciphers aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr
+
+User username # it depends on your login; this one only for understanding
+
+PubkeyAcceptedAlgorithms +ssh-rsa
+HostkeyAlgorithms +ssh-rsa
+
+
+
+
+
+####  na estação editar /etc/ssh/ssh_config e adcionar:   ####
+
+
+Ciphers             aes128-cbc,3des-cbc
+KexAlgorithms +diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512
+
+HostkeyAlgorithms ssh-dss,ssh-rsa
+KexAlgorithms diffie-hellman-group1-sha1
+
+
