@@ -1,0 +1,24 @@
+Erro na instalação - Não encontra arquivos/bibliotecas - stdarg.h
+
+
+EXECUTAR
+
+
+find /usr -name "stddef.h"                                                                                  
+/usr/include/linux/stddef.h
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+/usr/src/linux-headers-5.15.0-2-common/include/linux/stddef.h
+/usr/src/linux-headers-5.15.0-2-common/include/uapi/linux/stddef.h
+/usr/src/linux-headers-5.16.0-1-common/include/linux/stddef.h
+/usr/src/linux-headers-5.16.0-1-common/include/uapi/linux/stddef.h
+/usr/src/linux-headers-5.15.0-3-common/include/linux/stddef.h
+/usr/src/linux-headers-5.15.0-3-common/include/uapi/linux/stddef.h
+
+
+
+NA SAIDA DO COMANDO TERA VARIOS DIRETORIOS DOS HEADERS - ESCOLHA A ULTIMA VERSÃO ( /usr/src/linux-headers-5.17.0-kali3-common/include/linux )
+
+
+e DIGITE O COMANDO 
+
+sudo CPATH=/usr/src/linux-headers-5.17.0-kali3-common/include/linux vmware-modconfig --console --install-all
