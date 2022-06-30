@@ -22,3 +22,19 @@ NA SAIDA DO COMANDO TERA VARIOS DIRETORIOS DOS HEADERS - ESCOLHA A ULTIMA VERSÃ
 e DIGITE O COMANDO 
 
 sudo CPATH=/usr/src/linux-headers-5.17.0-kali3-common/include/linux vmware-modconfig --console --install-all
+
+
+
+##### BUG NOVA VERSAO 16.3 para kernell 5.18 ### NAO COMPILA
+
+cd /usr/lib/vmware/modules/source
+git clone https://github.com/mkubecek/vmware-host-modules
+cd vmware-host-modules
+git checkout workstation-16.2.3
+make
+tar -cf vmnet.tar vmnet-only
+tar -cf vmmon.tar vmmon-only
+mv vmnet.tar /usr/lib/vmware/modules/source/
+mv vmmon.tar /usr/lib/vmware/modules/source/
+vmware-modconfig --console --install-all
+
