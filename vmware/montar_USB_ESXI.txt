@@ -1,0 +1,72 @@
+HABILITAR SSH
+
+ 
+
+/etc/init.d/usbarbitrator stop
+
+
+
+ /var/log/vmkernel.log   OU   ls -lha /dev/disks/     ( SERA NOME USB mpx.vmhbaX or naa.X.)
+
+
+
+####  CRIAR PARTICAO   ####
+
+
+partedUtil mklabel /dev/disks/naa.5000000000000001 gpt
+
+
+
+partedUtil getptbl /dev/disks/naa.5000000000000001  ( saida comando para calcular )
+
+
+
+## calcular ## 
+121597 * 255 * 63 -1 = 1953455804
+
+
+
+#### DELETAR PARTICAO ####
+partedUtil delete /dev/disks/naa.5000000000000001 1
+
+
+
+## CRIAR PARTICAO ###
+
+partedUtil setptbl /dev/disks/naa.5000000000000001 gpt "1 2048 1953455804 AA31E02A400F11DB9590000C2911D1B8 0"
+
+
+
+## FORMATAR PARTICAO ##
+
+
+vmkfstools -C vmfs6 -S USB-HDD /dev/disks/naa.5000000000000001:1
+
+
+
+
+## COMANDOS UTEIS ##
+
+
+ls -alh /vmfs/devices/disks
+
+
+vdq -q
+
+partedUtil showGuids
+
+
+
+
+SOURCE:  http://woshub.com/mount-usb-flash-drive-vmware-esxi/
+
+https://www.sbarjatiya.com/notes_wiki/index.php/Configure_VMFS_filesystem_on_USB_disk_and_mount_it_as_datastore_on_ESXi_host
+
+https://kb.vmware.com/s/article/1014953
+
+https://kb.vmware.com/s/article/1036609
+
+https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000Ct9MCAS
+
+
+
