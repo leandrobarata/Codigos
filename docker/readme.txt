@@ -11,7 +11,7 @@ docker ps
 docker-compose up -d
 
 
-#########   CRIAR IMAGEM COM DOCKER FILE ##############
+#########   CRIAR IMAGEM COM DOCKER FILE "Dockerfile.frontend.homologacao"  ##############
 
 docker build -force-recreate  -t teste -f Dockerfile.frontend.homologacao . 
 
