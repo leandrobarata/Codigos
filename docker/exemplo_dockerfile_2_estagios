@@ -1,0 +1,20 @@
+FROM node:16.14.2 as build-stage
+
+WORKDIR /app
+COPY ./package*.json ./
+RUN npm install --supress-warnings
+COPY ./ .
+RUN sed -i -e "s/http:\\//\\https:\\/\\/website.com.br';/g" /app/src/main.js
+RUN sed -i -e "s/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}.*/\\//g" /app/src/main.js
+RUN cat /app/src/main.js
+RUN npm run build
+
+
+
+
+FROM ubuntu/apache2:latest as production-stage
+
+RUN sed -i -e "10s/^/FallbackResource \/index.html/" /etc/apache2/sites-enabled/000-default.conf
+COPY --from=build-stage /app/dist /var/www/html
+EXPOSE 80
+CMD ["apache2-foreground"]
