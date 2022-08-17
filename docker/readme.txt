@@ -1,14 +1,5 @@
 
 
-## ACUNETIX SCANNER ##
-
-
-
-
-https://hub.docker.com/r/leandrobarata/acuscanner
-
-
-
 ### Listar 
 
 
@@ -20,10 +11,19 @@ docker ps
 docker-compose up -d
 
 
-####  Parar docker 
+####  Parar container
 
 
  docker-compose down
 
 
+
+
+
+## ACUNETIX SCANNER ##
+
+
+
+
+https://hub.docker.com/r/leandrobarata/acuscanner
 
