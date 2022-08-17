@@ -1,0 +1,53 @@
+pipeline {
+
+    agent none
+    
+    stages {
+        
+        stage('Cleanws') {
+        agent { label 'exec-first' }
+        steps {
+        cleanWs()
+        }
+        }
+
+        stage('Stage First') {
+            
+        stages {    
+            stage('Checkout') {
+            agent {label 'exec-projects' }
+            steps {
+            git branch: 'main', 
+            credentialsId: 'xxxxxxxxxxxxxxxxx', 
+            url: 'git@ssh.dev.github.com'
+            }
+            }          
+
+            stage('Build Image') {
+            agent {label 'exec-projects' }
+            steps {
+            sh '''docker build  -t imagem -f dockerfile .'''
+            }
+            }
+
+            stage('Push Image') {
+            agent {label 'exec-projects' }
+            steps {
+            sh '''docker push imagem'''
+            }
+            }
+
+            stage('Public Project') {
+            agent {label 'exec-projects' }
+            steps {
+            sh '''
+            ssh root@IP -C "docker rm -f nomecontainer" && \
+            ssh root@IP -C "docker pull debian" && \
+            ssh root@IP -C "docker run -itd --restart=always --name nomecontainer -p9044:80 imagem"
+            '''
+            }
+            }
+        }
+        }
+    }
+}
