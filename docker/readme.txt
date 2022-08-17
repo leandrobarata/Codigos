@@ -38,6 +38,17 @@ docker logs teste  -f
 docker run -itd --name teste -u root -v "${PWD}/:/api" -w /api debian 
 
 
+######  INSERIR TAG na imagem do container ######
+
+docker tag nomecontainer  imagem:latest
+ 
+ ######  UPLOAD da imagem do container 
+ 
+ docker push dockerhub.com.br:latest
+ docker push dockerhub.com.br
+ 
+ #### executar container ####
+ docker run -itd --restart=always --name nomecontainer  -p5080:5080 imagemcontainer
 
 
 
