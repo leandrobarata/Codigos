@@ -1,0 +1,180 @@
+version: "3"
+
+volumes:
+  mysql_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  zabbix:
+    driver: bridge
+
+services:
+  mysql-server:
+    hostname: mysql-server
+    command: --character-set-server=utf8 --collation-server=utf8_bin --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    image: mysql:${MYSQL_VERSION}
+    environment:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - zabbix
+  
+  zabbix-server: 
+    hostname: zabbix-server
+    restart: unless-stopped
+    image: zabbix/zabbix-server-mysql:${ZABBIX_VERSION}
+    environment:
+      - DB_SERVER_HOST=mysql-server
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 10051:10051
+    networks:
+      - zabbix
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./zbx_env/etc/zabbix_server.conf:/etc/zabbix/zabbix_server.conf:ro
+      - ./zbx_env/usr/lib/zabbix/externalscripts:/usr/lib/zabbix/externalscripts:ro
+      - ./zbx_env/usr/lib/zabbix/alertscripts:/usr/lib/zabbix/alertscripts:ro
+      - ./zbx_env/var/lib/zabbix/export:/var/lib/zabbix/export:rw
+      - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+      - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+      - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+      - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro        
+    depends_on:
+      - mysql-server
+
+  zabbix-web:
+    hostname: zabbix-web
+    restart: unless-stopped
+    image: zabbix/zabbix-web-nginx-mysql:${ZABBIX_VERSION}
+    environment:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - MYSQL_DATABASE=zabbix
+      - DB_SERVER_HOST=mysql-server
+      - ZBX_SERVER_HOST=zabbix-server
+      - ZBX_SERVER_NAME=zabbix-server        
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PHP_TZ=America/Cuiaba
+    ports:
+      - 80:8080
+      - 443:8443
+    networks:
+      - zabbix
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./zbx_env/etc/nginx/commercial.crt:/etc/ssl/nginx/ssl.crt:ro
+      - ./zbx_env/etc/nginx/private.key:/etc/ssl/nginx/ssl.key:ro
+    depends_on:
+      - mysql-server
+      - zabbix-server
+
+  grafana:
+    hostname: grafana
+    restart: unless-stopped
+    image: grafana/grafana-oss:${GRAFANA_VERSION}
+    environment:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app ${GFN_ZBX_PLUGIN_VERSION},grafana-clock-panel,grafana-simple-json-datasource
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=alexanderzobnin-zabbix-datasource
+      - GF_LOG_LEVEL=debug
+      - GF_AUTH_GENERIC_OAUTH_NAME=OAuth
+      - GF_AUTH_GENERIC_OAUTH_ENABLED=true
+      - GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP=true
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=app-grafana
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=jflYEoSqE1DL3s9LU0lfS3exINiTReDk
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=app-grafana
+#      - GF_AUTH_GENERIC_OAUTH_SCOPES=openid profile
+#      - GF_AUTH_GENERIC_OAUTH_EMAIL_ATTRIBUTE_NAME=email
+      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=http://192.168.4.88:8080/auth/realms/loglab/protocol/openid-connect/auth
+      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=http://192.168.4.88:8080/auth/realms/loglab/protocol/openid-connect/token
+      - GF_AUTH_GENERIC_OAUTH_API_URL=http://192.168.4.88:8080/auth/realms/loglab/protocol/openid-connect/userinfo
+      - GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE=true
+
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - 3000:3000
+    networks:
+      - zabbix
+    depends_on:
+      - zabbix-web
+
+  zabbix-agent:
+    hostname: zabbix-agent
+    restart: unless-stopped
+    image: zabbix/zabbix-agent:${ZABBIX_VERSION}
+    environment:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ZBX_HOSTNAME=zabbix-agent
+      - ZBX_DEBUGLEVEL=4
+      - ZBX_ENABLEREMOTECOMMANDS=1
+      - ZBX_SERVER_HOST=zabbix-server
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./zbx_agent/etc/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d:ro
+      - ./zbx_agent/frontend_hacks:/usr/share/zabbix/local/
+    networks:
+      - zabbix
+    depends_on:
+      - zabbix-server
+
+
+  zabbix-reports:
+    hostname: zabbix-reports
+    restart: unless-stopped
+    image: zabbix/zabbix-web-service:${ZABBIX_VERSION}
+    environment:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ZBX_ALLOWEDIP=zabbix-server,zabbix-web,0.0.0.0/0
+      - ZBX_DEBUGLEVEL=4
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - 10053:10053
+    depends_on:
+      - zabbix-server
+      - zabbix-web
+
+#  zapix:
+#    hostname: zapix
+#    restart: unless-stopped
+#    build:
+#      context: ./zapix
+#    depends_on:
+#      - zabbix-web
+
+
+#  zabbix-provisioning:
+#    hostname: zabbix-provisioning
+#    image: python:3.8.5-alpine3.12
+#    command: ["python", "/tmp/provisioning.py"]
+#    volumes:
+#      - ./zabbix/provisioning.py:/tmp/provisioning.py:ro
+#    depends_on:
+#      - zabbix-frontend
+
