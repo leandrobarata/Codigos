@@ -2,8 +2,8 @@
 
 ### Listar 
 
-
 docker ps
+
 
 
 ####  Iniciar dentro do contexto
@@ -11,11 +11,45 @@ docker ps
 docker-compose up -d
 
 
+#########   CRIAR IMAGEM COM DOCKER FILE ##############
+
+docker build -force-recreate  -t teste -f Dockerfile.frontend.homologacao . 
+
+
+
+############ INICIAR container "teste" expondo portas ###############
+
+docker run -itd --name teste -p8000:8000 -p9080:4200  teste 
+
+
+#############  EXCLUIR container "teste"  ####
+
+docker rm -f teste
+
+
+
+############ VER LOGS contatiner "teste" ##############
+
+docker logs teste  -f
+
+
+################  Executar container "teste" mapeando pasta local 
+
+docker run -itd --name teste -u root -v "${PWD}/:/api" -w /api debian 
+
+
+
+
+
 ####  Parar container
 
 
  docker-compose down
 
+
+###########  LIMPAR TUDO ###############
+
+docker system prune --all 
 
 
 
