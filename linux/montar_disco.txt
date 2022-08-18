@@ -12,12 +12,19 @@ editar nano /etc/fstab
 
 //IPCOMPARTILHAMENTODOSAMBA/bkporacle /backuporacle cifs rw,credentials=/home/.credentials,uid=oracle,gid=oinstall 0 0
 
+//IPCOMPARTILHAMENTODOSAMBA/pastacompartilhada /mnt/pasta cifs domain=DOMAIN,dir_mode=0777,username=NOMEUSUARIO,password=SENHA 0 0
 
 mount -a 
 
 
 ##### Montar VIA terminal
 
+install cifs-utils
+
+mkdir /mnt/PASTA
+
+
+mount -t cifs -o user=USUARIO,password="SENHA",domain=NOMEDOMINIO,dir_mode=0777 //IPDOCOMPARTILHAMENTOSAMBA/pastacompartilhada /mnt/pasta
 
  mount -t cifs -o user=USUARIO,password="SENHA",domain=NOMEDOMINIO,uid=oracle,gid=oinstall //IPDOCOMPARTILHAMENTOSAMBA/bkporacle /backuporacle/
 
