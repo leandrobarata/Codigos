@@ -1,0 +1,7 @@
+
+## executa todos os dias as 06:01, 12:01 e 18:01
+
+
+01 06,12,18 * * * bash /etc/bkp.sh
+
+
