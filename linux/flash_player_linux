@@ -1,0 +1,32 @@
+add REPO em    /etc/apt/sources.list                                                                                
+
+deb http://archive.canonical.com/ubuntu bionic  partner
+
+echo "deb https://winunix.github.io/debian focal main" | sudo tee /etc/apt/sources.list.d/winunix-focal.list
+
+wget -qO - "https://winunix.github.io/debian/public.key" | sudo apt-key add -
+
+
+
+apt update
+
+
+
+apt-get install flashplayer-mozilla  
+
+
+
+### EDIT
+
+/etc/adobe/mms.cfg
+
+
+EOLUninstallDisable=1
+AllowListPreview=1
+AutoUpdateDisable=1
+SilentAutoUpdateEnable=0
+ErrorReportingEnable=0
+TraceOutputEcho=0
+# AllowListUrlPattern=http[s]://site.domain/
+# AllowListUrlPattern=file:///
+
