@@ -30,3 +30,8 @@ TraceOutputEcho=0
 # AllowListUrlPattern=http[s]://site.domain/
 # AllowListUrlPattern=file:///
 
+
+
+#### UTILIZA BROWSER
+
+https://ftp.mozilla.org/pub/devedition/releases/82.0b1/linux-x86_64/pt-BR/firefox-82.0b1.tar.bz2
