@@ -84,6 +84,61 @@ df -h
 
 
 
+##############################
+
+    parted /dev/sda
+    (parted) print
+
+Warning: Not all of the space available to /dev/sda appears to be used, you can fix the GPT to use all of the space (an extra 41943040 blocks) or continue with the
+current setting?
+Fix/Ignore? Fix
+
+And then you will have something like that
+
+Model: ATA BHYVE SATA DISK (scsi)
+Disk /dev/sda: 42,9GB
+Sector size (logical/physical): 512B/16384B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End     Size    File system     Name  Flags
+ 1      1049kB  538MB   537MB   fat32                 boot, esp
+ 2      538MB   20,9GB  20,4GB  ext4
+ 3      20,9GB  21,5GB  535MB   linux-swap(v1)
+
+    Optionnaly delete your swap partition (parted) rm 3
+    (parted) resizepart 2
+
+Warning: Partition /dev/sda2 is being used. Are you sure you want to continue?
+Yes/No? Yes
+
+    (parted) End? [20,9GB]? 37GB
+    Optionnaly recreate the swap partition at the end of disk with (parted) mkpart
+
+Partition name?  []? swap
+File system type?  [ext2]? swap
+parted: invalid token: swap
+File system type?  [ext2]? linux-swap
+Start? 37GB
+End? 42,9GB
+
+    (parted) print
+
+Number  Start   End     Size    File system     Name  Flags
+ 1      1049kB  538MB   537MB   fat32                 boot, esp
+ 2      538MB   37,0GB  36,5GB  ext4
+ 3      37,0GB  42,9GB  5949MB  linux-swap(v1)  swap
+
+    You can (parted) quit
+
+Extend/Rebuild the FileSystems
+
+    Launch mkswap /dev/sda3
+    Launch resize2fs /dev/sda2
+    Then blkid /dev/sda3
+    Report the new UUID in /etc/fstab
+    Remount your swap with swapon /dev/sda3
+    You are ALL GOOD TO GO (or not)
 
 
 
