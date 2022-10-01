@@ -1,0 +1,10 @@
+#### DATACENTER 2022 ###
+
+
+Dism /online /Set-Edition:ServerDatacenter /ProductKey:WX4NM-KYWYW-QJJR4-XV3QB-6VM33 /AcceptEula
+
+
+cscript %windir%\system32\slmgr.vbs /skms kms.msgang.com
+
+
+cscript %windir%\system32\slmgr.vbs /ato
