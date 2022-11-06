@@ -22,3 +22,23 @@ editar .htaccess em public_html e adcionar
 ErrorDocument 404 /index.html
 ErrorDocument 403 /index.html
 ErrorDocument 500 /index.html
+
+
+
+#######################################
+
+
+Editar "Posted on" nas paginas:
+
+Em public/wp-content/themes/template-tags.php 
+
+
+
+
+
+
+#######################################################
+
+
+
+
