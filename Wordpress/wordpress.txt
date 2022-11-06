@@ -34,11 +34,9 @@ Em public/wp-content/themes/template-tags.php
 
 
 
-
-
-
 #######################################################
 
 
+Editar 404 erro page
 
-
+editar arquivo em public/wp-content/themes/nomedothema/404.php
