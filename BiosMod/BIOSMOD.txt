@@ -1,0 +1,41 @@
+EDITAR BIOS 
+
+Baixar AMIBCP-5-02.zip
+
+
+
+BACKUP BIOS
+
+
+.\FPTW64.exe -bios -d biosreg.bin
+
+
+
+
+
+FLASH BIOS
+
+
+.\FPTW64.exe -bios -f biosreg.bin
+
+
+
+
+
+
+EDITAR LOGO
+
+
+baixar UEFITool_0.21.5_win.zip
+
+
+
+- pesquisar Ctrl+F, em "GUID", input 7BB28B99-61BB-11D5-9A5D-0090273FC14D
+- Ver as tres primeiras linhas e achar Logo.bmp
+- clicar com direito  "Raw section" line, "Extract body..." and salvar
+- para inserir o arquivo editado clicar com direito "Raw section" line, "Replace body..." e selecione o arquivo  .raw 
+- Salvar BIOS
+
+
+
+
