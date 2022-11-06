@@ -1,6 +1,10 @@
-EDITAR BIOS 
+Para Editar a BIOS 
 
 Baixar AMIBCP-5-02.zip
+
+Após abrir a bios no programa , em ACCESS/USE  definir parametro USER nas opções desejadas.
+
+
 
 
 
@@ -11,15 +15,10 @@ BACKUP BIOS
 
 
 
-
-
 FLASH BIOS
 
 
 .\FPTW64.exe -bios -f biosreg.bin
-
-
-
 
 
 
@@ -35,6 +34,8 @@ baixar UEFITool_0.21.5_win.zip
 - clicar com direito  "Raw section" line, "Extract body..." and salvar
 - para inserir o arquivo editado clicar com direito "Raw section" line, "Replace body..." e selecione o arquivo  .raw 
 - Salvar BIOS
+
+
 
 
 
