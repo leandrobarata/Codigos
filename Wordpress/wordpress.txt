@@ -1,0 +1,24 @@
+ESCONDER TITULO
+
+
+Editar na pasta themes o arquivo style.css
+
+
+
+
+.entry-title {
+display: none;
+}
+
+
+
+
+##################################################################
+
+Redirect erros 404 , 403 ,500 etc...
+
+editar .htaccess em public_html e adcionar 
+
+ErrorDocument 404 /index.html
+ErrorDocument 403 /index.html
+ErrorDocument 500 /index.html
