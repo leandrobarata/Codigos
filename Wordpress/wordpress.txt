@@ -86,4 +86,7 @@ Remover arquivo na pasta principal readme.html
 
 ###########################################################
 
+DISABLE /wp-admin/admin-ajax.php
+
+editar .htaccess    RewriteRule ^wp-admin/admin-ajax\.php /index.php?wph-throw-404 [L]
 
