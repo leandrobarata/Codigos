@@ -77,3 +77,18 @@ BLoquear enumeração usuarios - Instalar plugin siteguard e em Block Author Que
 
 ##########################################################
 
+
+
+MITIGAR  exploração do wp-cron.php 
+
+
+em .htaccess adicionar RewriteRule ^wp-cron.php /index.php?wph-throw-404 [L]
+
+
+
+#######################################################
+
+
+
+
+
