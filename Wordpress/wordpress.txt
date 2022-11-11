@@ -51,15 +51,7 @@ Adicionar functions.php codigo abaixo
 
 
 
-function remove_author_category_pages_from_sitemap($provider, $name)
-{
-    if ('users' === $name) {
-        return false;
-    }
-    return $provider;
-}
-
-add_filter('wp_sitemaps_add_provider', 'remove_author_category_pages_from_sitemap', 10, 2);
+add_filter( 'wp_sitemaps_enabled', '__return_false'); 
 
 
 
