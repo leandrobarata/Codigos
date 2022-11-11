@@ -69,4 +69,11 @@ add_filter('wp_sitemaps_add_provider', 'remove_author_category_pages_from_sitema
 ###########################################################
 
 
+BLoquear enumeração usuarios - Instalar plugin siteguard e em Block Author Query remover parametros do Exclude Plugins
+
+
+
+
+
+##########################################################
 
