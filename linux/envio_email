@@ -1,0 +1,27 @@
+openssl s_client -starttls smtp -connect smtp.gmail.com:587  -crlf -ign_eof
+
+EHLO gmail.com
+
+
+AUTH LOGIN
+
+
+echo -ne "seuemail" | base64          
+                                                                                                                                                                                            
+
+echo -ne "suasenha" | base64
+
+
+MAIL FROM:<seuemail>
+
+RCPT TO:<seuemail>
+
+DATABASE
+
+From: "Hacker da PF" <hackerdapf@mailinator.com>
+To: "DelegadoPF" <delegado@mailinator.com>
+Subject: Email Teste Hacker
+
+Hello Hacker
+
+.
