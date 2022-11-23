@@ -1,0 +1,19 @@
+#######################  EDITAR ID VM ###################  EXEMPLO ALTERAR ID 101 para 100
+
+Desligar a VM
+
+acessar proxmox
+
+lvs -a
+
+
+lvrename data/vm-101-disk-0 vm-100-disk-0
+
+
+
+sed -i "s/101/100/g" /etc/pve/qemu-server/101.conf
+
+
+mv /etc/pve/qemu-server/101.conf /etc/pve/qemu-server/100.conf
+
+
