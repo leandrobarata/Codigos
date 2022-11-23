@@ -2,7 +2,7 @@
 
 Desligar a VM
 
-acessar proxmox
+acessar proxmox via CLI (SSH)
 
 lvs -a
 
