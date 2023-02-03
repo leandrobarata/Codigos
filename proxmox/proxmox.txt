@@ -17,3 +17,22 @@ sed -i "s/101/100/g" /etc/pve/qemu-server/101.conf
 mv /etc/pve/qemu-server/101.conf /etc/pve/qemu-server/100.conf
 
 
+#######################  REMOVER CLUSTER FORCE  ###################  
+
+
+
+systemctl stop pve-cluster corosync
+pmxcfs -l
+rm /etc/corosync/*
+rm /etc/pve/corosync.conf
+killall pmxcfs
+systemctl start pve-cluster
+rm -rf /etc/pve/nodes/XXXXX      -> XXXXX é nome do node que precisa remover
+
+
+
+
+
+
+
+
