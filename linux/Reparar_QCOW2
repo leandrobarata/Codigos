@@ -1,0 +1,8 @@
+CHECAR
+
+qemu-img check vmflow.qcow2
+
+
+REPARAR
+
+qemu-img check -r all vmflow.qcow2
