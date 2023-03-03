@@ -1,0 +1,40 @@
+
+
+INSTALAR NO POWERSHELL
+
+Install-WindowsFeature RDS-RD-Server -IncludeManagementTools
+
+
+Go to Computer Configuration\Administrative Templates\Windows Components\Remote Desktop Services\Remote Desktop Session Host\Licensing  
+
+
+Use the specified Remote Desktop license servers to set the server - INSERIR 127.0.0.1 e ENABLE
+
+
+Set the Remote Desktop licensing mode  -  ESCOLHER PER USER
+
+
+
+
+RESET RDS
+
+
+Open "Regedit" and go to HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\GracePeriod  e DELETAR L$RTMIMEBOMB.....  ( ANTES EXECUTAR PASSOS ABAIXO)
+
+
+Right Click and go to Permission – Advanced – Owner. Change the ownership from Network Service to Administrator Account
+
+
+Assign Full Control permission to Administrator 
+
+
+RESTART SERVICE
+
+Restart-Service TermService -force
+
+(Invoke-WmiMethod -PATH (gwmi -namespace root\cimv2\terminalservices -class win32_terminalservicesetting).__PATH -name GetGracePeriodDays).daysleft
+119
+
+
+
+
