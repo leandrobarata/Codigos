@@ -1,0 +1,11 @@
+##### CRIAR CREDENCIAL docker login ########
+
+- Criar Role docker ( adcionar todos privilegias relacionado a docker)
+
+- Criar usuario docker ( inserir grante DOCKER)
+
+- Criar repositorio ( selecionar HTTP , porta 8083, Permitr Anonymous docker pull , Habilitar DOcker V1 API , Marcar Stric Content Type Validation , Allow Redeploy , Proprietary Components)
+
+
+
+
