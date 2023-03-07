@@ -66,6 +66,7 @@ docker system prune --all
 ###########  LIMPAR VOLUME ###############
 docker volume prune 
 
+docker system prune --volumes -a
 
 
 DOCKER SERVICE
