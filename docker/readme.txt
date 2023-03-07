@@ -63,6 +63,25 @@ docker tag nomecontainer  imagem:latest
 docker system prune --all 
 
 
+###########  LIMPAR VOLUME ###############
+docker volume prune 
+
+
+
+DOCKER SERVICE
+
+
+Na pasta do projeto EXECUTAR
+
+docker stack deploy --compose-file docker-compose.yml nomedocontainerasercriado
+
+
+LISTAR SERVICES CRIADOS DO DEPLOY
+
+docker service ls
+
+
+
 
 
 ## ACUNETIX SCANNER ##
