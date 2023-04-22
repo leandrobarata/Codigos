@@ -1,0 +1,49 @@
+### QCOW2 FORTIGATE
+
+modprobe nbd max_part=16
+qemu-nbd -c /dev/nbd0 image.qcow2
+mount /dev/nbd0p4 /mnt
+
+
+
+umount /mnt
+qemu-nbd -d /dev/nbd0
+
+
+EXTRACT FAIL 
+
+$>ls
+boot.msg datafs.tar.gz extlinux.conf filechecksum flatkc flatkc.chk ldlinux.c32 ldlinux.sys lost+found rootfs.gz rootfs.gz.chk
+
+$>sudo cp ../fortios_mount/rootfs.gz .
+$>gunzip rootfs.gz
+$>cpio -i 2> /dev/null < rootfs
+$>ls
+bin.tar.xz bin.tar.xz.chk boot data data2 dev etc fortidev init lib lib64 migadmin.tar.xz node-scripts.tar.xz proc rootfs sbin sys tmp usr usr.tar.xz usr.tar.xz.chk var
+
+Interestingly, attempting to decompress the xz files fail with corruption errors:
+
+$>xz --decompress *.xz
+xz: bin.tar.xz: Compressed data is corrupt
+xz: migadmin.tar.xz: Compressed data is corrupt
+xz: node-scripts.tar.xz: Compressed data is corrupt
+xz: usr.tar.xz: Compressed data is corrupt
+
+
+
+EXTRACT OK
+
+
+$>find . -name xz
+./sbin/xz
+$>./sbin/xz --decompress *.xz
+bash: ./sbin/xz: No such file or directory
+$>file ./sbin/xz
+./sbin/xz: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /fortidev/lib64/ld-linux-x86-64.so.2, BuildID[sha1]=eef5d20a9f8760df951ed122a5faf4de86a7128a, for GNU/Linux 3.2.0, stripped
+$>patchelf --set-interpreter /lib64/ld-linux-x86-64.so.2 sbin/xz
+$>./sbin/xz --decompress *.xz
+$>ls *.tar
+bin.tar migadmin.tar node-scripts.tar usr.tar
+
+
+
