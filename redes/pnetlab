@@ -1,0 +1,23 @@
+### ATIVAR IMAGEM FORTIGATE
+
+VIA CLI NO FW E EXECUTAR 
+
+execute vm-license-options account-id xxxx@fortinet.com
+
+execute vm-license-options account-password xxxxxxx
+
+execute vm-license
+
+
+
+#######################################
+
+CONECTAR VIA SSH NO PNETLAB E EXECUTAR
+
+LISTAR IMAGENS
+
+ishare2 search fort
+
+BAIXAR IMAGENS
+
+ishare2 pull qemu XXX  ( XXX numero da imagem a ser baixada)
