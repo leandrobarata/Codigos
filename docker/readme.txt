@@ -82,6 +82,16 @@ LISTAR SERVICES CRIADOS DO DEPLOY
 docker service ls
 
 
+######## DOCKER SWARM ##########
+
+No NODE MANAGER EXECUTAR O COMANDO ( como saber qual node é manager digitar docker node ls e ver qual é LEADER)
+
+docker swarm join-token worker
+
+AO GERAR o TOKEN ir no NODE que deseja inserir no SWARM e DIGITAR A SAIDA DO COMANDO ANTERIOR ex:
+
+docker swarm join --token SWMTKN-1-16m76pnhbsadsadsadsadsadsadsadsadsadsa4fw0m01 IP:2377
+
 
 
 
