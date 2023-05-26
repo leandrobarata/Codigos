@@ -1,0 +1,18 @@
+##################
+
+Liberar qualquer ip acessar ROOT 
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'SUASENHA' WITH GRANT OPTION;
+
+
+##################
+
+Liberar acesso externo ip  
+
+
+nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+
+ALTERAR bind-address = 0.0.0.0
+
+RESTART O SERVIÇO
