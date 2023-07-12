@@ -1,0 +1,4 @@
+############### FORÇAR FSCK NO BOOT ##############
+Editar no momento do boot o grub.  Pressione e e ao lado de quiet splash adicionar comando abaixo e pressionar F10
+
+fsck.mode=force fsck.repair=yes
