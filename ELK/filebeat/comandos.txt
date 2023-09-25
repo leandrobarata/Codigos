@@ -1,0 +1,3 @@
+### CARREGAR DASHBOARDS  #### em cada endpoint do filebeat executar:
+
+filebeat setup --dashboards
