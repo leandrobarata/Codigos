@@ -1,0 +1,4 @@
+##### GERAR PASSOWRD ####### add as senhas no arquivo .env 
+
+
+bin/elasticsearch-setup-passwords interactive
