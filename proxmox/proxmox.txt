@@ -32,6 +32,17 @@ rm -rf /etc/pve/nodes/XXXXX      -> XXXXX é nome do node que precisa remover
 
 
 
+#######################   ERROR  Error code: SEC_ERROR_REUSED_ISSUER_AND_SERIAL   ###################  
+
+
+rm /etc/pve/local/pve-ssl.*
+rm /etc/pve/pve-root-ca.pem
+pvecm updatecerts --force
+systemctl restart pveproxy
+
+
+
+
 
 
 
