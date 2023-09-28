@@ -41,8 +41,11 @@ pvecm updatecerts --force
 systemctl restart pveproxy
 
 
+#######################   ERROR ao acessar CONSOLE DA VM-  Host Key verification failed  TASK ERROR: Failed to run vncproxy.  ###################  
 
+digitar:
 
+/usr/bin/ssh -e none -o 'HostKeyAlias=server-b-name' root@server-b-ip-address /bin/true
 
 
 
