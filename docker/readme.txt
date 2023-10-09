@@ -93,6 +93,13 @@ AO GERAR o TOKEN ir no NODE que deseja inserir no SWARM e DIGITAR A SAIDA DO COM
 docker swarm join --token SWMTKN-1-16m76pnhbsadsadsadsadsadsadsadsadsadsa4fw0m01 IP:2377
 
 
+####### PARA REMOVER NODE ORFAO ######
+
+no manager executar docker node ls
+
+docker node demote IDDONODEORFAO
+
+docker node rm IDDONODEORFAO --force
 
 
 ## ACUNETIX SCANNER ##
