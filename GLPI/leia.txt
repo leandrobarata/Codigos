@@ -1,0 +1,16 @@
+
+
+### todos conetar no banco ####
+
+GRANT ALL ON nomebanco.* TO usuario@'%' IDENTIFIED BY 'senhadousuario';
+
+
+
+### HABILITAR NO BANCO o time zone do banco ######
+
+GRANT SELECT ON mysql.time_zone_name TO 'usuariodobanco'@;
+
+FLUSH PRIVILEGES; 
+
+
+
