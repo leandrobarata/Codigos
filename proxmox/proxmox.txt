@@ -48,5 +48,11 @@ digitar:
 /usr/bin/ssh -e none -o 'HostKeyAlias=server-b-name' root@server-b-ip-address /bin/true
 
 
+###################  PROBLEMAS EM MIGRA A VM O DISCO FICAR DUPLICADO ENTRE OS HOSTS ###################
+
+Acessar o cluster e digitar comando abaixo:
+
+qm rescan --vmid ID
+
 
 
