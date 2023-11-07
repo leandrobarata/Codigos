@@ -1,0 +1,23 @@
+EXECUTAR SNAPSHOTING BACKUP
+
+ETCDCTL_API=3 etcdctl snapshot save --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /tmp/backup.db
+
+LISTAR INFORMACOES
+ETCDCTL_API=3 etcdctl --write-out=table snapshot status /tmp/backup.db
+
+VERIFICAR STATUS ENDPOINT
+ETCDCTL_API=3 etcdctl --write-out=table --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key endpoint status
+
+VERIFICAR STATUS ETCD
+ETCDCTL_API=3 etcdctl --write-out=table --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key endpoint health
+
+
+EXECUTAR SNAPSHOTING RESTORE
+
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  snapshot restore --data-dir=/var/lib/etcd-backup/ /tmp/backup.db
+
+EDITAR VOLUMES
+nano /etc/kubernetes/manifests/etcd.yaml
+
+  - hostPath:
+      path: /var/lib/etcd-backup
