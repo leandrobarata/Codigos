@@ -23,7 +23,7 @@ mv /etc/pve/qemu-server/101.conf /etc/pve/qemu-server/100.conf
 
 systemctl stop pve-cluster corosync
 pmxcfs -l
-rm /etc/corosync/*
+rm /etc/corosync/* -R
 rm /etc/pve/corosync.conf
 killall pmxcfs
 systemctl start pve-cluster
