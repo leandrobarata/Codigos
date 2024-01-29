@@ -10,3 +10,10 @@ du -sh .[^.]* | sort -hr | head -n 20
 ### OCULTOS
 
 du -ahd1 | sort -hr | head -10
+
+
+
+###  LIMPAR LOGS JOURNAL ####
+
+
+journalctl --vacuum-time=1d
