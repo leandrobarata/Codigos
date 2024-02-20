@@ -1,0 +1,6 @@
+ARQUIVOS ALTERADOS EM 10 MINUTOS
+
+find / -type f -mmin -10
+
+
+  
