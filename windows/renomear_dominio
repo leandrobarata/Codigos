@@ -1,0 +1,60 @@
+The first step is to create a primary DNS zone for the new domain on your DNS server:
+
+    Connect to DC and open the DNS Manager console (dnsmgmt.msc);
+    Expand the Forward Lookup Zones node;
+    Select New zone;
+
+Create a new primary AD-integrated zone called theitbros.com with enabled Allow only secure dynamic updates option. Wait for the new zone to replicate all the DNS servers in the forest.
+
+
+Run the following command to generate an XML file containing your domain configuration:
+
+rendom /list
+
+Open the Domainlist.xml with notepad:
+
+notepad Domainlist.xml
+
+
+Use the Edit > Replace option to find the old domain name in the file and replace it with the new one. Manually change the value in the NetBiosName field. Save the changes to the Domainlist.xml file.
+
+rendom /showforest
+
+rendom /upload
+
+repadmin.exe /syncall /d /e /P /q DomainNamingMaster_DC_HostName
+
+rendom /prepare
+
+rendom /execute
+
+This command automatically reboots all domain controllers.
+
+All the domain-joined workstations and member servers must be rebooted twice for the changes to take effect. The first reboot allows the domain member to detect the domain change and change the full computer name. The second is used to register the new computer name in the new DNS zone.
+
+
+
+Use the following command to rename each DC:
+
+netdom computername DC01.contoso.com /add:DC01.harpagus.com.br
+
+netdom computername DC01.contoso.com /makeprimary:DC01.harpagus.com.br
+
+
+Reboot the domain controller to apply the changes.
+
+
+
+gpfixup /olddns:contoso.com /newdns:theitbros.com
+
+
+gpfixup /oldnb:CONTOSO /newnb:THEITBROS
+
+
+rendom /clean
+
+
+rendom /end
+
+
+
