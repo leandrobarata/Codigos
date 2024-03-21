@@ -4,7 +4,7 @@ The first step is to create a primary DNS zone for the new domain on your DNS se
     Expand the Forward Lookup Zones node;
     Select New zone;
 
-Create a new primary AD-integrated zone called theitbros.com with enabled Allow only secure dynamic updates option. Wait for the new zone to replicate all the DNS servers in the forest.
+Create a new primary AD-integrated zone called harpagus.com.br with enabled Allow only secure dynamic updates option. Wait for the new zone to replicate all the DNS servers in the forest.
 
 
 Run the following command to generate an XML file containing your domain configuration:
@@ -45,10 +45,10 @@ Reboot the domain controller to apply the changes.
 
 
 
-gpfixup /olddns:contoso.com /newdns:theitbros.com
+gpfixup /olddns:contoso.com /newdns:harpagus.com.br
 
 
-gpfixup /oldnb:CONTOSO /newnb:THEITBROS
+gpfixup /oldnb:CONTOSO /newnb:HARPAGUS.COM.BR
 
 
 rendom /clean
