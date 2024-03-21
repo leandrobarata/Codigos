@@ -57,4 +57,18 @@ rendom /clean
 rendom /end
 
 
+############################################
+ALTERAR UPN TODOS USUARIOS
+
+# LISTA USUARIOS
+Get-ADUser -Filter * | Sort-Object Name | Format-Table Name, UserPrincipalName
+
+### ALTERAR UPN EM MASSA
+
+
+PS C:\> $LocalUsers = Get-ADUser -Filter {UserPrincipalName -like '*contoso.com'} -Properties UserPrincipalName -ResultSetSize $null
+PS C:\> $LocalUsers | foreach {$newUpn = $_.UserPrincipalName.Replace("contoso.com","harpagus.com.br"); $_ | Set-ADUser -UserPrincipalName $newUpn}
+
+
+
 
