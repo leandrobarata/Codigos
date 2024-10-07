@@ -1,0 +1,15 @@
+###Install-Module AzureAD     instalar modulo
+
+####Connect-AzureAD   conectar no azure via web
+
+Get-AzureADUser | Select-Object DisplayName, UserPrincipalName, Mail | Export-Csv -Path "C:\Users\Administrador\AzureADUsers.csv" -NoTypeInformation
+$allUsers = @()
+$usersPerPage = 1000
+ $users = Get-AzureADUser -Top $usersPerPage
+$allUsers += $users
+while ($users.Count -eq $usersPerPage) {
+$users = Get-AzureADUser -Top $usersPerPage -Skip $allUsers.Count
+$allUsers += $users
+}
+
+$allUsers | Select-Object DisplayName, UserPrincipalName, Mail | Export-Csv -Path "C:\Users\Administrador\AzureADUsers.csv" -NoTypeInformation
