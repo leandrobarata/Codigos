@@ -8,3 +8,44 @@ cscript %windir%\system32\slmgr.vbs /skms kms.msgang.com
 
 
 cscript %windir%\system32\slmgr.vbs /ato
+
+
+
+## 2025 ##
+
+LISTA
+DISM.exe /Online /Get-TargetEditions
+
+Windows Server 2025 Standard 	TVRH6-WHNXV-R9WG3-9XRFY-MY832
+Windows Server 2025 Datacenter 	D764K-2NDRG-47T6Q-P8T8W-YP6DF
+Windows Server 2025 Datacenter: Edição Azure 	XGN3F-F394H-FD2MY-PP6FD-8MCRC
+
+PRODOCUT
+
+DISM /online /Set-Edition:ServerStandard /ProductKey:XXXXX-XXXX-XXXX-XXX-XXXX /AcceptEula
+
+
+cscript.exe c:\windows\system32\slmgr.vbs -skms *****************
+
+* kms8.msguides.com
+* kms.digiboy.ir
+* kms.ddns.net
+* kms.shuax.com
+* kensol263.imwork.net:1688
+* kms789.com
+* dimanyakms.sytes.net:1688
+* kms.03k.org:1688
+* 54.223.212.31
+* kms.cnlic.com
+* hq1.chinancce.com
+* kms.chinancce.com
+* franklv.ddns.net
+* k.zpale.com
+* m.zpale.com
+* mvg.zpale.com
+* xykz.f3322.org
+
+ATIVA
+
+cscript.exe c:\windows\system32\slmgr.vbs -ato
+
